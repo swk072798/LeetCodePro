@@ -82,27 +82,41 @@ class NumArray {
  *
  */
 
-class NumMatrix {
+/**
+ * 此题是一位数组的爸爸版，趁着上一题写的偷工减料，把这一题好好写一些
+ * 构造函数中复制一个mm数组，然后使用一个dp来记录该位置之前所有元素的和
+ * sumRegion中直接使用sum += (dp[i][col2] - dp[i][col1] + mm[i][col1])来读取dp中的记忆数据就行
+ * 每次调用的时间复杂度为O(1)
+ */
 
+class NumMatrix {
+    private int [][] mm;
     private int[][] dp;
     public NumMatrix(int[][] matrix) {
-        dp = new int [matrix.length][matrix[0].length];
-        for(int i = 0; i < matrix.length; i++){
-            for(int j = 0; j < matrix[0].length; j++){
-                if(j == 0){
-                    dp[i][j] = matrix[i][j];
-                }
-                else{
-                    dp[i][j] = dp[i][j -1] + matrix[i][j];
+        if(matrix.length > 0){
+            mm = new int[matrix.length][matrix[0].length];
+            mm = matrix;
+            dp = new int [matrix.length][matrix[0].length];
+            for(int i = 0; i < matrix.length; i++){
+                for(int j = 0; j < matrix[0].length; j++){
+                    if(j == 0){
+                        dp[i][j] = matrix[i][j];
+                    }
+                    else{
+                        dp[i][j] = dp[i][j -1] + matrix[i][j];
+                    }
                 }
             }
         }
     }
 
     public int sumRegion(int row1, int col1, int row2, int col2) {
+        if(mm.length == 0 && dp.length == 0){
+            return 0;
+        }
         int sum = 0;
         for(int i = row1; i <= row2; i++){
-            sum += (dp[i][col2] - dp[i][col1]);
+            sum += (dp[i][col2] - dp[i][col1] + mm[i][col1]);
         }
         return sum;
     }
