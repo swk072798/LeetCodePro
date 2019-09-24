@@ -2,7 +2,7 @@ package com.leetcode.practice.Test20190919;
 
 /**
  * @Author: liu qinchang
- * @Description:
+ * @Description: 广度遍历
  * @Date: Created in 9:36 19/9/19
  * @Param:
  * @return

@@ -7,7 +7,7 @@ import java.util.Queue;
 
 /**
  * @Author: liu qinchang
- * @Description: 深度优先
+ * @Description: 广度优先
  * @Date: Created in 9:30 19/9/23
  * @Param:
  * @return
