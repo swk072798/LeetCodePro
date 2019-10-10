@@ -48,23 +48,28 @@ public class Test_3 {
         String[] ss = s.split("");
         ArrayList<String> al = new ArrayList<>();
         int MAX_LEN = 0;
-
-        for(int i = 0;i < s.length();i++){
-            if(!al.contains(ss[i])){
-                al.add(ss[i]);
-            }
-            else{
+        int j = 0;
+        while(j < ss.length){
+            for(int i = j;i < s.length();i++){
+                if(!al.contains(ss[i])){
+                    al.add(ss[i]);
+                }
+                else{
+                    if(al.size() > MAX_LEN){
+                        MAX_LEN = al.size();
+                    }
+                    al.clear();
+                    al.add(ss[i]);
+                }
                 if(al.size() > MAX_LEN){
                     MAX_LEN = al.size();
-                }
-                al.clear();
-                al.add(ss[i]);
-            }
-            if(al.size() > MAX_LEN){
-                MAX_LEN = al.size();
-            }
 
+                }
+
+            }
+            j ++;
         }
+
         return MAX_LEN;
     }
 }

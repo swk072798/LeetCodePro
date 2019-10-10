@@ -22,7 +22,7 @@ package com.leetcode.practice.Test20190926;
 /**
  * 解法没错，会超时，答案解析中说道可以将中间遍历的过程改为逆序遍历，从右向左遍历整个数组
  */
-public class Test739 {
+public class Test_739 {
     public int[] dailyTemperatures(int[] T) {
         int j = 1;
         int[] a = new int[T.length];

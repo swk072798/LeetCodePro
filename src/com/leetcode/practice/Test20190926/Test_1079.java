@@ -9,8 +9,6 @@ package com.leetcode.practice.Test20190926;
  **/
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -32,12 +30,19 @@ import java.util.List;
  *
  */
 
+/**
+ * 集合了数组问题和全排列问题
+ *
+ * 验证时出了点错，少了一些子集和排列，还在找问题，思路没错
+ */
+
 public class Test_1079 {
 
     public int numTilePossibilities(String tiles) {
         String[] str = tiles.split("");
         List<List<String>> result = new ArrayList<>();
-        findAllSub(0,str,result,new ArrayList<>());
+        findAllSub(0, str, result, new ArrayList<>());
+        findAllPaiLie(0, 0, str, result);
         for(List<String> l : result){
             for(String s : l){
                 System.out.print(s);
@@ -47,20 +52,38 @@ public class Test_1079 {
         return result.size();
     }
 
-    public void findAllSub(int begin, String[] str, List<List<String>> result, List<String> list){
+    public void findAllSub(int begin, String[] str, List<List<String>> result, List<String> list){      //先找子集
         if(!result.contains(list)){
             result.add(new ArrayList<>(list));
         }
         for(int i = begin; i < str.length; i++){
             list.add(str[i]);
-            findAllSub(begin + 1, str, result, list);
+            findAllSub(i + 1, str, result, list);
             list.remove(list.size() - 1);
         }
     }
 
-    public void findAllPaiLie(int begin, String[] str, List<List<String>> result, List<String> list, int[] sign){
-        for(int i = begin; i < str.length; i++){
-
+    public void findAllPaiLie(int first, int i, String[] str, List<List<String>> result){       //再找全排列
+        if(i == str.length){
+            return;
         }
+        String[] copy_str = str;
+        while(first < str.length){
+            swap(copy_str, first, i);
+            List<String> l = new ArrayList<>();
+            for(int k = 0;k < copy_str.length; k++){
+                l.add(copy_str[k]);
+            }
+            if(!result.contains(l)){
+                result.add(l);
+            }
+            first ++;
+        }
+        findAllPaiLie(0,++i,str,result);
+    }
+    public void swap(String[] str, int i, int j){
+        String temp = str[i];
+        str[i] = str[j];
+        str[j] = temp;
     }
 }
